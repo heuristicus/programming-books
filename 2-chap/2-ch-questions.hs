@@ -66,3 +66,9 @@ pick'' m n | m < n = 0
 
 -- k
 -- "CDE"
+
+-- Question 5
+-- newton-raphson method for roots
+
+nr a x = (x + (a / x)) / 2
+nrd a x = nrd a (nr a x)
