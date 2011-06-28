@@ -48,3 +48,26 @@ count :: Char -> String -> Int
 count c "" = 0
 count c (x:xs) | c == x = 1 + count c xs
                | otherwise = count c xs
+                             
+--1.14
+blowup :: String -> String
+blowup "" = ""
+blowup (x:xs) = x : blowup xs
+
+--1.15, really long winded.
+srtString :: [String] -> [String]
+srtString [] = error "Empty list"
+srtString [x] = [x]
+srtString xs = minString xs : (srtString (rmvMinString xs))
+
+rmvMinString :: [String] -> [String]
+rmvMinString [] = error "Empty list"
+rmvMinString [x] = []
+rmvMinString (x:xs) | x == min x (minString xs) = xs
+                    | otherwise = x : rmvMinString xs
+                                  
+minString :: [String] -> String
+minString [] = error "empty list"
+minString [x] = x
+minString (x:xs) | x < minString xs = x
+                 | otherwise = minString xs
