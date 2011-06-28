@@ -31,10 +31,20 @@ srtInts' xs = let
   m = mnmInt xs 
   in m : (srtInts' (removeFst m xs))
      
-average :: [Int] -> Float
-average [] = error "Empty list"
-average xs = fromInt (sum xs) / fromInt (length xs)
+--average :: [Int] -> Float
+--average [] = error "Empty list"
+--average xs = fromInt (sum xs) / fromInt (length xs)
 
 sum' :: [Int] -> Int
 sum' [] = error "Empty list"
 sum' (x:xs) = x + sum' xs
+
+length' :: [a] -> Int
+length' [] = 0
+length' (x:xs) = 1 + length' xs
+
+--1.13
+count :: Char -> String -> Int
+count c "" = 0
+count c (x:xs) | c == x = 1 + count c xs
+               | otherwise = count c xs
