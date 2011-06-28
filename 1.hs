@@ -71,3 +71,14 @@ minString [] = error "empty list"
 minString [x] = x
 minString (x:xs) | x < minString xs = x
                  | otherwise = minString xs
+                               
+--
+prefix :: String -> String -> Bool
+prefix [] ys = True
+prefix (x:xs) [] = False
+prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
+
+-- 1.17
+subString :: String -> String -> Bool
+subString xs ys = prefix xs ys
+subString xs (y:ys) = subString xs ys
