@@ -68,9 +68,16 @@ count c (x:xs) | c == x = 1 + count c xs
                | otherwise = count c xs
                              
 --1.14
+copy :: Int -> Char -> String
+copy 0 c = []
+copy n c = c : (copy (n - 1) c)
+
 blowup :: String -> String
-blowup "" = ""
-blowup (x:xs) = x : blowup xs
+blowup xs = blowup' xs 1
+
+blowup' :: String -> Int -> String
+blowup' [] n = []
+blowup' (x:xs) n = (copy n x) ++ (blowup' xs (n + 1))
 
 --1.15, really long winded.
 srtString :: [String] -> [String]
