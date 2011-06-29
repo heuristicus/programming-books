@@ -90,6 +90,24 @@ minString [x] = x
 minString (x:xs) | x < minString xs = x
                  | otherwise = minString xs
                                
+-- 1.15, proper solution
+
+mnm :: Ord a => [a] -> a
+mnm [] = error "Empty list"
+mnm [x] = x
+mnm (x:xs) = min x (mnm xs)
+
+srt :: Ord a => [a] -> [a]
+srt [] = []
+srt xs = m : (srt (removeFrst m xs)) where m = mnm xs
+                               
+                                           
+removeFrst :: Ord a => a -> [a] -> [a]
+removeFrst m [] = error "Empty list"
+removeFrst m [x] | m == x = []
+removeFrst m (x:xs) | m == x = xs
+                    | otherwise = x : removeFrst m xs
+                                  
 --
 prefix :: String -> String -> Bool
 prefix [] ys = True
@@ -98,8 +116,9 @@ prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
 -- 1.17
 subString :: String -> String -> Bool
-subString xs ys = prefix xs ys
-subString xs (y:ys) = subString xs ys
+subString [] ys = True
+subString (x:xs) [] = False
+subString (x:xs) (y:ys) = ((x==y) && (prefix xs ys)) || (subString (x:xs) ys)
 
 --
 factors :: Integer -> [Integer]
