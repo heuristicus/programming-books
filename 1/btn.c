@@ -18,6 +18,6 @@ main(){
       ++new;
     if (c == ' ')
       ++blank;
-  }
-  printf("%d %d %d", blank, tab, new);
+  
+  printf("%d %d %d\n", blank, tab, new);
 }
