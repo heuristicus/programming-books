@@ -15,17 +15,17 @@ main(){
 
 int getline2(){
   int c, i, j;
-  char line[BASE_SIZE]
+  char line[BASE_SIZE];
 
-  for (i = 0; (c = getchar()) != EOF && c != '\n'; ++i)
+  for (i = 0; (c = getchar()) != EOF && c != '\n'; ++i){
     if (i >= sizeof(line)){
       char temp[sizeof(line) * 2];
       for (j = 0; j < sizeof(line); ++i)
 	temp[i] = line[i];
-      line = temp
-    } else {
-      line[i] = c;
+      line = temp;
     }
+  }
+  line[i] = c;
   if (i >= LOWER_LIMIT)
     printf("length: %d\n%s", i, s);
   return i;
