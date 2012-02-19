@@ -24,8 +24,8 @@ int getline2(){
 	temp[i] = line[i];
       line = temp;
     }
+    line[i] = c;
   }
-  line[i] = c;
   if (i >= LOWER_LIMIT)
     printf("length: %d\n%s", i, s);
   return i;
