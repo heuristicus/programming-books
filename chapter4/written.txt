@@ -1,0 +1,18 @@
+1. 
+
+| exp                        | equiv                      |
+| !(a < b)                   | a > b                      |
+| !(a <= b && c <= d)        | b <= a && d <= c           |
+| !(a + 1 == b + 1)          | a + 1 != b + 1             |
+| !(a < 1 or b < 2 && c < 3) | a >= 1 or b >= 2 && c >= 3 |
+
+2.
+
+a = 1, b = 2, c = 3
+x = 1.0
+
+| exp                     | equiv                           | val |
+| a > b && c < d          | (a > b) && (c < d)              |   0 |
+| a < ! b or ! ! a        | (a < !b) or !(!a)               |   1 |
+| a + b < ! c + c         | (a + b) < ((!c) + c)            |   0 |
+| a - x or b * c && b / a | ((a - x) or (b * c)) && (b / a) |   1 |
