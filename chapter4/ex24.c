@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 	    handle_degenerate(a, b, c);
 	else
 	    handle_general(a, b, c);
-	printf("Enter three integers.\n");
+	printf("Enter three values.\n");
     }
     return 0;
 }
