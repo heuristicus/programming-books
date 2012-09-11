@@ -70,8 +70,8 @@ void handle_general(double a, double b, double c)
     } else {
 	printf("Discriminant is negative. Two complex roots. Computing...\n");
 	mult = (1 / (2 * a));
-	discriminant = sqrt(-discriminant);
-	printf("root 1: %.6lf + %.6lfi, root 2: %.6lf - %.6lfi\n", mult * -b, mult * discriminant, mult * -b, mult * discriminant);
+	discriminant = mult * sqrt(-discriminant);
+	printf("root 1: %.6lf + %.6lfi, root 2: %.6lf - %.6lfi\n", mult, mult * discriminant, mult, mult * discriminant);
 	return;
     }
     
