@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     double a, b, c;
     int error;
     
-    printf("Enter three values. The roots of a polynomial with those constants will be computed.\n");
+    printf("Enter three values. The roots of a polynomial with those coefficients will be computed.\n");
     while ((error = scanf("%lf%lf%lf", &a, &b, &c)) == 3){
 	if (a == 0)
 	    handle_degenerate(a, b, c);
@@ -59,7 +59,7 @@ void handle_degenerate(double a, double b, double c)
 /* handles general cases where a != 0 */
 void handle_general(double a, double b, double c)
 {
-    double root1, root2, discriminant, cnum;
+    double root1, root2, discriminant, mult;
     
     discriminant = calc_disc(a, b, c);
     printf("%.6lf\n", discriminant);
@@ -69,9 +69,9 @@ void handle_general(double a, double b, double c)
 	printf("Discriminant is zero. Two real equal roots. Computing...\n");
     } else {
 	printf("Discriminant is negative. Two complex roots. Computing...\n");
-	cnum =  (1 / (2 * a)) * -b;
+	mult = (1 / (2 * a));
 	discriminant = sqrt(-discriminant);
-	printf("root 1: %.6lf + i * %.6lf, root 2: %.6lf - i * %.6lf\n", cnum, discriminant, cnum, discriminant);
+	printf("root 1: %.6lf + %.6lfi, root 2: %.6lf - %.6lfi\n", mult * -b, mult * discriminant, mult * -b, mult * discriminant);
 	return;
     }
     
