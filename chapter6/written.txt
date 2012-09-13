@@ -1,0 +1,36 @@
+1.
+
+address of i, 10, 10, 10
+
+4.
+
+l
+l
+l
+nl
+nl
+nl
+l
+l
+
+8.
+
+1 4
+8 12
+3 36
+
+9
+
+#define N 4
+
+int a[N] = {0, 2, 2, 3, 4}; //too many values
+int b[N - 5]; //initialiser negative
+int c[3.0] //initialiser not int
+
+10. 
+
+p points to the address of a, not to the value in it. Change it changes the pointer to point to somewhere else which contains the value 777, but the address p points to does not change.
+
+11.
+
+*p + 1 should be corrected to *(p + 1). Otherwise, it just adds 1 to the value in the current p.
