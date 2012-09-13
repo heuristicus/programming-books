@@ -1,24 +1,28 @@
-#include <stdio.h>
-#include <math.h>
 #include "poly.h"
 
 #define N 5 /* N is the max degree */
 
 double p[N + 1];
 
+/* this is the main file for ex12, 13 and 14. */
 int main(int argc, char *argv[])
 {
-    printf("Enter polynomial coefficients (degree 5)\n");
-    int i = 0;
+    //simple_poly();
+    //add_poly();
+    multiply_poly();
+    return 0;
+}
+
+void simple_poly(void)
+{
     double x;
     
-    while ((scanf("%lf", &p[i])) == 1 && i++ < N);
-    
+    scan_to_arr("Enter polynomial coefficients degree 5", p, N);
+        
     printf("Enter x value.\n");
     scanf("%lf", &x);
     
     printf("Value of polynomial: %lf\n", eval(p, x, N));
-    return 0;
 }
 
 /* 6 additions, 5 multiplications plus power function. */
@@ -39,4 +43,12 @@ double eval_naive(double p[], double x, int n) /* n is max degree */
 double eval(double p[], double x, int n)
 {
     return p[0] + x * (p[1] + x * (p[2] + x * (p[3] + x * (p[4] + x * (p[5])))));
+}
+
+void scan_to_arr(char *message, double p[], int n)
+{
+    int i = 0;
+    
+    printf("%s\n", message);
+    while ((scanf("%lf", &p[i])) == 1 && i++ < n);
 }
