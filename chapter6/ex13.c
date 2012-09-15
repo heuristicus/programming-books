@@ -12,7 +12,6 @@ void add_poly(void)
     scan_to_arr("Enter coefficients for polynomial a. Enter zero for values with no coefficients.", g, n);
     printf("Polynomial a is:");
     print_poly(g, n);
-    
     scan_to_arr("Enter coefficients for polynomial b. Enter zero for values with no coefficients.", h, n);
     printf("Polynomial b is:");
     print_poly(h, n);
