@@ -11,10 +11,11 @@ void multiply(int mult[], int a[], int b[]);
 
 int main(int argc, char *argv[])
 {
-    int a[N] = {7, 5, 9, 8, 9, 7, 5, 0, 0, 9, 9, 0, 8, 8}; /* numbers are in reverse here */
-    int b[N] = {7, 7, 5, 3, 1, 2, 8, 8, 9, 6, 7, 7};
+    int a[N] = {0, 0, 0, 0, 9, 0, 0, 0, 0, 1}; /* numbers are in reverse here */
+    int b[N] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+    //int a[N] = {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
+    //int b[N] = {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
     
-
     int mult[N * 2] = {0};
             
     multiply(mult, a, b);
@@ -67,7 +68,10 @@ void wrt(cchr *s, int a[], int size)
 	putchar(' ');
         
     // print remaining digits, including zero
-    for (; i >= 0; --i)
+    for (; i >= 0; --i){
 	printf("%d", a[i]);
+	if (i % 3 == 0)
+	    putchar(' ');
+    }
     putchar('\n');
 }

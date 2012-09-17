@@ -34,3 +34,21 @@ p points to the address of a, not to the value in it. Change it changes the poin
 11.
 
 *p + 1 should be corrected to *(p + 1). Otherwise, it just adds 1 to the value in the current p.
+
+17.
+
+abc
+abc
+abc
+dbc
+
+18.
+
+abcdefghijklmnopqrstuvwxyz
+xyz
+
+Swapping p and q results in p overflowing, since q is only 4 characters long.
+
+22.
+
+hello
