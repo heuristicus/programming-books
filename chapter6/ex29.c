@@ -1,81 +1,61 @@
-/* DO NOT LOOK AT THIS FILE - TERRIBLE Code */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
 #define MAX_IN 500
+#define MAX_STR_LEN 50
+#define DICT_SIZE 100
 
-int in_list(char c[100][20], char *word, int length);
-void replace_words(char words[MAX_IN][30], char english[100][20], char foreign[100][20]);
+char *foreign[DICT_SIZE];
+char *english[DICT_SIZE];
+
+void read_dict(char *filename, char *arr[]);
+
 
 int main(int argc, char *argv[])
 {
     if (argc != 3){
-	printf("usage: ex29 100_foreign_words 100_english_words\n");
+	printf("usage: ex29 english_words foreign_words\n");
 	exit(1);
     }
 	
-    char foreign[100][20], english[100][20];
-    FILE *eng, *frn;
-    eng = fopen(argv[2], "r");
-    frn = fopen(argv[1], "r");
-        
-    int i;
+    extern char *foreign[DICT_SIZE], *english[DICT_SIZE];
     
-    /* oh god this is horrible */
-    for (i = 0; i < 100; ++i){
-	fgets(english[i], 100, eng);
-	fgets(foreign[i], 100, frn);
-	char *pos;
-	if ((pos=strchr(english[i], '\n')) != NULL)
-	    *pos = '\0';
-	if ((pos=strchr(foreign[i], '\n')) != NULL)
-	    *pos = '\0';
+    read_dict(argv[1], english);
+    read_dict(argv[2], foreign);
+    
+    int i = 0;
+
+    for (; i < DICT_SIZE; ++i){
+//	printf("eng: %s, for %s\n", english[i], foreign[i]);
     }
 
-    char words[MAX_IN][30];
+    char *words[MAX_IN];
     char c;
     
-    i = 0;
-        
-    while((c = scanf("%s", &*words[i])) != EOF && ++i < MAX_IN);
+//    while((c = scanf("%s", &*words[i])) != EOF && ++i < MAX_IN);
     
-    for (i = 0; i < MAX_IN; ++i)
-	printf("%s ", words[i]);
-    
-    replace_words(words, english, foreign);
-    
-    
-    for (i = 0; i < MAX_IN; ++i)
-	printf("%s ", words[i]);
-    
-
     return 0;
 }
 
-int in_list(char c[100][20], char *word, int length)
+void read_dict(char *filename, char *arr[])
 {
+    FILE *fp = fopen(filename, "r");
+    char tmp[MAX_STR_LEN], *tmp2;
     int i;
     
-    for (i = 0; i < length; ++i){
-	if (strcmp(c[i], word) == 0)
-	    return i;
-    }
-    return 0;
-}
-
-void replace_words(char words[MAX_IN][30], char english[100][20], char foreign[100][20])
-{
-    int i;
-    int index;
-    
-    for (i = 0; i < MAX_IN; ++i){
-	if ((index = in_list(english, words[i], 100))){
-	    printf("in dict %s\n", words[i]);
-	    for (; *foreign[index] != '\0' && *words[i] != '\0'; ++*foreign[index], ++*words[i]){
-		*words[i] = *foreign[index];
-	    }
+    for (i = 0; i < DICT_SIZE; ++i){
 	    
-	}
+	if (fgets(tmp, MAX_STR_LEN, fp) == NULL)
+	    printf("Error while reading from file %s.\n", filename);
+	printf("%s", tmp);
+	arr[i] = calloc(strlen(tmp) + 1, sizeof(char));
+	if ((tmp2 = strchr(tmp, '\n')) != NULL)
+	    *tmp2 = '\0';
+	printf("%s\n", tmp);
+	arr[i] = tmp;
+	printf("\n");
     }
+    
+    
 }
