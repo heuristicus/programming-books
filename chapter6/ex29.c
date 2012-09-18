@@ -50,6 +50,11 @@ int main(int argc, char *argv[])
     }
     fclose(fp);
     
+    dealloc(english, DICT_SIZE);
+    dealloc(foreign, DICT_SIZE);
+    dealloc(words, words_len);
+    
+    
     return 0;
 }
 
