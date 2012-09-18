@@ -1,42 +1,68 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 
-#define MAX_IN 500
+#define MAX_IN 10000 // max chars in text
 #define MAX_STR_LEN 50
 #define DICT_SIZE 100
 
 int read_file(char *filename, char *arr[], int size);
 void dealloc(char *arr[], int size);
-void str_spc_split(char *str, char *arr[]);
+int str_spc_split(char *str, char *arr[]);
+int contains(char *arr[], char *str, int len);
 
 int main(int argc, char *argv[])
 {
-    if (argc != 4){
-	printf("usage: ex29 english_words foreign_words replace_text\n");
+    if (argc != 5){
+	printf("usage: ex29 english_words foreign_words replace_text out_file\n");
 	exit(1);
     }
 	
     char *foreign[DICT_SIZE], *english[DICT_SIZE], *words[MAX_IN];
-    int i;
+    int i, words_len;
     
-    char *tmp = "thake that, koward! you are unpermitted in this place!";
-    str_spc_split(tmp, words);
-    for (i = 0; i < MAX_IN; ++i)
-	printf("%s\n", words[i]);
+    FILE *fp = fopen(argv[3], "r");
+    char tmp[MAX_IN];
+    
+    fgets(tmp, MAX_IN, fp);
+    fclose(fp);
 
-    return 0;
+    words_len = str_spc_split(tmp, words);
     
     read_file(argv[1], english, DICT_SIZE);
     read_file(argv[2], foreign, DICT_SIZE);
-    read_file(argv[3], words, MAX_IN);
-    
 
+    fp = fopen(argv[4], "w");
+
+    int wloc;
     
-    for (i = 0; i < MAX_IN; ++i){
-	printf("%s ", words[i]);
-    }    
+    for (i = 0; i < words_len; ++i){
+	if ((wloc = contains(english, words[i], DICT_SIZE))){
+	    fputs(foreign[wloc - 1], fp);
+	    fputc(' ', fp);
+	} else {
+	    fputs(words[i], fp);
+	    fputc(' ', fp);
+	}
+	
+    }
+    fclose(fp);
+    
+    return 0;
+}
+
+/* returns the index of the string in the array if it exists. If in 0th location, returns 1. */
+int contains(char *arr[], char *str, int len)
+{
+    int i;
+        
+    for (i = 0 ; i < len; ++i){
+	if (!strcmp(arr[i], str))
+	    return i + 1;
+    }
+    
     return 0;
 }
 
@@ -58,22 +84,28 @@ int read_file(char *filename, char *arr[], int size)
 	    *tmp2 = '\0';
 	strcpy(arr[i], tmp);
     }
-    
+    fclose(fp);
     return size;
 }
 
-void str_spc_split(char *str, char *arr[])
+/* returns the last index that something was put into. */
+int str_spc_split(char *str, char *arr[])
 {
     register char *wrd_strt = str, *cur_ch = str;
-    int i, len = strlen(str), size;
+    int i, j, len = strlen(str), size;
+    printf("%d\n", len);
 
-    for (i = 0; i < len; ++i, *cur_ch++){
+    for (i = 0, j = 0; j < len; *cur_ch++, ++j){
 	if (isblank(*cur_ch) || ispunct(*cur_ch)){
-	    size = cur_ch - wrd_strt + 1; // Size of the current word, plus one space for terminator
-	    
-	    printf("size of word %d\n", size);
+	    size = cur_ch - wrd_strt; // Size of the current word
+	    arr[i] = calloc(size + 1, sizeof(char)); // space for terminator
+	    strncpy(arr[i], wrd_strt, size);
+	    i++;
+	    for (; isblank(*cur_ch) || ispunct(*cur_ch); *cur_ch++, ++j);
+	    wrd_strt = cur_ch;
 	}
     }
+    return i;
 }
 
 /* frees all allocated memory in the array */
