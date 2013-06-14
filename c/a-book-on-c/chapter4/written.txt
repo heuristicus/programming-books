@@ -1,0 +1,77 @@
+1. 
+
+| exp                        | equiv                      |
+| !(a < b)                   | a > b                      |
+| !(a <= b && c <= d)        | b <= a && d <= c           |
+| !(a + 1 == b + 1)          | a + 1 != b + 1             |
+| !(a < 1 or b < 2 && c < 3) | a >= 1 or b >= 2 && c >= 3 |
+
+2.
+
+a = 1, b = 2, c = 3
+x = 1.0
+
+| exp                     | equiv                           | val |
+| a > b && c < d          | (a > b) && (c < d)              |   0 |
+| a < ! b or ! ! a        | (a < !b) or !(!a)               |   1 |
+| a + b < ! c + c         | (a + b) < ((!c) + c)            |   0 |
+| a - x or b * c && b / a | ((a - x) or (b * c)) && (b / a) |   1 |
+
+6.
+
+0 1 0
+0 0 0
+1 -5 -10
+
+7. 
+
+first piece causes infinite loop due to assignment of i in test expression
+
+second piece is always executed - the test is always true
+
+8.
+
+0 0 1
+1
+1
+0
+
+9.
+
+7
+
+11.
+
+Probably not possible to cause infinite loop. Even if one of the values is hugely negative and the other is above the value at which it will cause the test to be false, at some point one of the variables will reach the value. One of the numbers has to be negative at all times, and the other must not reach the value in the test. Due to the increment this is probably impossible.
+
+14.
+1243243243...
+
+16.
+
+majority value is 64 for 7 boolean variables. 
+
+Theorem: The number of majority values with n boolean variables being used, where n > 1, is (2 ^ n) / 2.
+
+20.
+
+0 0 0
+0 0 1
+
+21. 
+
+a is likely to be correct. It ensures that a divide by zero error does not occur in the second part of the expression.
+
+32.
+
+1243243243243...
+
+33.
+
+min(x, y, z)
+
+(x < y) ? ((x < z) ? x : z) : ((y < z) ? y : z
+
+min(x, y, z, w)
+
+(x < y) ? ((x < z) ? ((x < w) ? x : ((w < z) ? w : ... screw this.
