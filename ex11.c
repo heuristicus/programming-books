@@ -2,10 +2,10 @@
 
 int main(int argc, char *argv[])
 {
-  int i = 0;
-  while(i < argc){
-    printf("arg %d: %s\n", i, argv[i]);
-    i++;
+    int i = 0;
+    while(i < argc){
+      printf("arg %d: %s\n", i, argv[i]);
+      i++;
   }
   
   //char *states[] = {"California", "Oregon", "Massachusetts", "New Jersey"};
@@ -15,15 +15,15 @@ int main(int argc, char *argv[])
   i = 0;
 
   while(i < num_states){
-    states[i] = argv[i];
-    i++;
+      states[i] = argv[i];
+      i++;
   }
 
   i = 0;
   
   while(i < num_states){
-    printf("state %d: %s\n", i, states[i]);
-    i++;
+      printf("state %d: %s\n", i, states[i]);
+      i++;
   }
 
   return 0;
