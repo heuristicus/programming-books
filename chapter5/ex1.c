@@ -11,7 +11,6 @@ int main(int argc, char *argv[])
     printf("Enter two values. The second must be an integer. v1 ^ v2 will be computed.\n");
     scanf("%lf%d", &x, &n);
     printf("Value %.6lf\n", power(x, n));
-    
     return 0;
 }
 
